@@ -1,9 +1,38 @@
+
+#*   -------------------------------------------------------------------
+#*                                                 r u n  d e m o . p y
+#?                                                          v 1 . 0 . 0
+
+#?   Ruta del módulo: /run_demo.py
+
+#?   Dependencias del módulo:
+#   - tiktoken
+#   - random
+
+#?   Input:
+#   - Parámetros simulados de mercado:
+#     - volatility: str ∈ {low, medium, high, extreme}
+#     - volume: str ∈ {low, high}
+
+#?   Output:
+#   - Métricas de ejecución impresas por consola:
+#     - Consumo total de tokens con y sin artifact
+#     - Outputs únicos generados
+#     - Porcentaje estimado de ahorro de tokens
+
+#?   Descripción:
+#   Demostración controlada de congelamiento de contexto (artifact)
+#   para eliminar el costo de reenvío de reglas de decisión en
+#   ejecuciones repetidas.
+
+#*  --------------------------   A u t o r -  M a t í a s  G a l a r z a
+
+
 import tiktoken
 import random
 
-# ============================================================
-# CONTEXT FREEZING DEMO
-# ============================================================
+
+#*  -----------------------   C O N T E X T   F R E E Z I N G   D E M O
 
 enc = tiktoken.get_encoding("cl100k_base")
 
@@ -11,9 +40,8 @@ def count_tokens(text):
     return len(enc.encode(text))
 
 
-# ----------------------------
-# ARTIFACT (FULL CONTEXT)
-# ----------------------------
+#*  ---------------------   A R T I F A C T  ( F U L L   C O N T E X T )
+
 ARTIFACT = """
 REGIMES:
 - estable
@@ -34,9 +62,8 @@ RULES:
 artifact_tokens = count_tokens(ARTIFACT)
 
 
-# ----------------------------
-# EXECUTION ENGINE
-# ----------------------------
+#*  ----------------------------------   E X E C U T I O N   E N G I N E
+
 def run_iteration(volatility, volume):
     if volatility == "low" and volume == "low":
         return "regime=estable | variables=precio"
@@ -46,9 +73,8 @@ def run_iteration(volatility, volume):
         return "regime=inestable | variables=precio,volumen,volatilidad"
 
 
-# ----------------------------
-# SIMULATION
-# ----------------------------
+#*  ----------------------------------------------   S I M U L A T I O N
+
 iterations = 5000
 volatility_space = ["low", "medium", "high", "extreme"]
 volume_space = ["low", "high"]
@@ -58,17 +84,15 @@ baseline_tokens_total = 0
 outputs = set()
 
 
-# ----------------------------
-# INIT
-# ----------------------------
+#*  ----------------------------------------------------------   I N I T
+
 print("\n=== INIT PHASE ===")
 print(f"Artifact tokens (full context): {artifact_tokens}")
 print("--------------------------------")
 
 
-# ----------------------------
-# EXECUTION
-# ----------------------------
+#*  ------------------------------------------------   E X E C U T I O N
+
 print("\n=== EXECUTION PHASE ===\n")
 
 for i in range(iterations):
@@ -94,9 +118,8 @@ for i in range(iterations):
         print()
 
 
-# ----------------------------
-# SUMMARY
-# ----------------------------
+#*  ----------------------------------------------------   S U M M A R Y
+
 print("--------------------------------")
 print("\n=== SUMMARY ===")
 print(f"Iterations: {iterations}")
@@ -117,3 +140,19 @@ print(f"Estimated token savings: ~{round(savings, 2)}%")
 print("\nThis demonstrates how freezing decision state")
 print("converts repeated long-context cost into")
 print("a one-time payment.\n")
+
+
+#* ---------------------------------------------------------   N O T A S
+
+#?  Notas de desarrollo:
+
+# 1. El patrón es especialmente efectivo cuando se aplica primero a
+#    contenido trivial y repetitivo. Al congelar estas capas básicas,
+#    se reduce el ruido contextual y se libera presupuesto de tokens
+#    para decisiones de mayor nivel.
+
+# 2. El enfoque es escalable y compuesto: múltiples artifacts pueden
+#    encadenarse o superponerse. Cada capa congelada reduce costo
+#    marginal y estabiliza el sistema a medida que la complejidad crece.
+
+#* -----------------------  A c t u a l i z a c i o n  -  2026 - 01 - 27
