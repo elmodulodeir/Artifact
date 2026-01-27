@@ -1,0 +1,51 @@
+=== INIT PHASE ===
+Artifact tokens (full context): 77
+--------------------------------
+
+=== EXECUTION PHASE ===
+
+Iteration 1
+volatility=medium
+volume=high
+-> regime=transicion | variables=precio,volumen
+
+Iteration 2
+volatility=medium
+volume=high
+-> regime=transicion | variables=precio,volumen
+
+Iteration 3
+volatility=medium
+volume=low
+-> regime=transicion | variables=precio,volumen
+
+Iteration 4
+volatility=low
+volume=low
+-> regime=estable | variables=precio
+
+Iteration 5
+volatility=low
+volume=high
+-> regime=inestable | variables=precio,volumen,volatilidad
+
+--------------------------------
+
+=== SUMMARY ===
+Iterations: 5000
+Unique outputs: 3
+
+WITH FROZEN ARTIFACT:
+- Artifact tokens (once):    77
+- Delta tokens total:        41277
+- TOTAL TOKENS USED:         41354
+
+WITHOUT ARTIFACT (baseline):
+- TOTAL TOKENS USED:         426277
+
+=== COST COMPARISON ===
+Estimated token savings: ~90.3%
+
+This demonstrates how freezing decision state
+converts repeated long-context cost into
+a one-time payment.
