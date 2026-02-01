@@ -111,6 +111,31 @@ cost-sensitive LLM systems where logic stability exceeds input variability.
 
 ---
 
+## Why Decision Artifacts Matter
+
+Immediate cost reduction
+Stable decision logic is paid once and reused, dramatically lowering marginal inference cost in repeated executions.
+
+Predictable and controllable behavior
+Decisions are driven by explicit, frozen logic, reducing variance and unexpected model behavior.
+
+Scales with usage, not complexity
+As execution volume grows, cost increases only with new information, not with repeated reasoning.
+
+System-level optimization
+Improves efficiency without changing models, infrastructure, or training pipelines.
+
+Operational transparency
+Decision logic is visible and auditable, simplifying debugging, compliance, and iteration.
+
+Low integration risk
+Can be introduced incrementally alongside existing LLM systems.
+
+Reusable across domains
+The same pattern applies to agents, workflows, routing, and decision engines.
+
+---
+
 ## Scope
 
 This is a minimal, verifiable demonstration.
