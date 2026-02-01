@@ -160,3 +160,13 @@ It intentionally avoids:
 
 The goal is to isolate and prove the **context freezing pattern**
 as a standalone optimization technique.
+
+---
+
+## Beyond LLM Execution
+
+While this repository focuses on LLM context optimization, the underlying pattern is more general.
+
+Any system that repeatedly evaluates noisy or changing inputs against relatively stable decision logic can benefit from freezing that logic into explicit, reusable artifacts.
+
+By externalizing and reusing decision criteria, systems reduce noise, improve reproducibility, and scale judgment without incurring linear cognitive or contextual cost.
