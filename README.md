@@ -52,6 +52,18 @@ This shifts cost from:
 
 ---
 
+## When This Pattern Matters
+
+This pattern is especially useful if you are running:
+
+- Agent loops with stable decision logic
+- High-frequency workflows with low input variance
+- Cost-sensitive LLM systems at scale
+- Architectures where reproducibility and auditability matter
+- Hybrid systems (LLM + deterministic pipelines)
+
+---
+
 ## What This Demo Shows
 
 - A frozen decision artifact (tens of tokens)
